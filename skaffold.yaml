@@ -1,0 +1,21 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: web-app
+build:
+  artifacts:
+  - image: sample-app
+    context: .
+    docker:
+      dockerfile: Dockerfile
+  tagPolicy:
+    gitCommit: {}
+  local:
+    useBuildkit: false
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes.yaml
+profiles:
+- name: gcb
+

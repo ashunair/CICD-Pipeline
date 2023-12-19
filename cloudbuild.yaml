@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/optimum-bonbon-404900/cicd-repo/cicd-demo-app:$SHORT_SHA', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "us-central1-docker.pkg.dev/optimum-bonbon-404900/cicd-repo/cicd-demo-app:$SHORT_SHA"]
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - >
+    gcloud deploy releases create release-$BUILD_ID
+    --delivery-pipeline=cicd-demo-app
+    --region=us-central1
+    --source=./
+    --images=sample-app=us-central1-docker.pkg.dev/optimum-bonbon-404900/cicd-repo/cicd-demo-app:$SHORT_SHA
+options:
+  logging: CLOUD_LOGGING_ONLY
