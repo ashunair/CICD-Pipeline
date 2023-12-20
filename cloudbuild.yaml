@@ -12,6 +12,6 @@ steps:
     --delivery-pipeline=cicd-demo-app
     --region=us-central1
     --source=./
-    --images=sample-app=us-central1-docker.pkg.dev/optimum-bonbon-404900/cicd-repo/cicd-demo-app:$SHORT_SHA
+    --images=sample-app=us-docker.pkg.dev/black-display-408016/myproject/cicd-demo-app:$SHORT_SHA
 options:
   logging: CLOUD_LOGGING_ONLY
