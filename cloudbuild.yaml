@@ -1,10 +1,10 @@
 steps:
 # Docker Build
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-docker.pkg.dev/black-display-408016/myproject/cicd-demo-app:$SHORT_SHA', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/black-display-408016/cicd-repo/cicd-demo-app:$SHORT_SHA', '.']
 # Docker Push
 - name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "us-docker.pkg.dev/black-display-408016/myproject/cicd-demo-app:$SHORT_SHA"]
+  args: ["push", "us-central1-docker.pkg.dev/black-display-408016/cicd-repo/cicd-demo-app:$SHORT_SHA"]
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
@@ -14,6 +14,6 @@ steps:
     --delivery-pipeline=cicd-demo-app
     --region=us-central1
     --source=./
-    --images=sample-app=us-docker.pkg.dev/black-display-408016/myproject/cicd-demo-app:$SHORT_SHA
+    --images=sample-app=us-central1-docker.pkg.dev/black-display-408016/cicd-repo/cicd-demo-app:$SHORT_SHA
 options:
   logging: CLOUD_LOGGING_ONLY
