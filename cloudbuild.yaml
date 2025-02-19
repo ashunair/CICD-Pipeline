@@ -1,10 +1,24 @@
 steps:
 # Docker Build
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/black-display-408016/cicd-repo/cicd-demo-app:$SHORT_SHA', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/innate-valor-451418-i0/app-repo/cicd-app:$SHORT_SHA', '.']
 # Docker Push
 - name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "us-central1-docker.pkg.dev/black-display-408016/cicd-repo/cicd-demo-app:$SHORT_SHA"]
+  args: ["push", "us-central1-docker.pkg.dev/innate-valor-451418-i0/app-repo/cicd-app:$SHORT_SHA"]
+
+# create cloud deploy pipeline 
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if ! gcloud deploy delivery-pipelines describe demopipeline --region=us-central1 &> /dev/null; then
+        echo "Creating Cloud Deploy pipeline..."
+        gcloud deploy apply --file=clouddeploy.yaml --region=us-central1 --project=$PROJECT_ID
+      else
+        echo "Cloud Deploy pipeline already exists."
+      fi
+
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
@@ -14,6 +28,6 @@ steps:
     --delivery-pipeline=cicd-demo-app
     --region=us-central1
     --source=./
-    --images=sample-app=us-central1-docker.pkg.dev/black-display-408016/cicd-repo/cicd-demo-app:$SHORT_SHA
+    --images=sample-app=us-central1-docker.pkg.dev/innate-valor-451418-i0/app-repo/cicd-app:$SHORT_SHA
 options:
   logging: CLOUD_LOGGING_ONLY
