@@ -1,12 +1,12 @@
 steps:
-# Docker Build
+# 1. Docker Build
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'us-central1-docker.pkg.dev/innate-valor-451418-i0/app-repo/cicd-app:$SHORT_SHA', '.']
-# Docker Push
+# 2. Docker Push
 - name: 'gcr.io/cloud-builders/docker'
   args: ["push", "us-central1-docker.pkg.dev/innate-valor-451418-i0/app-repo/cicd-app:$SHORT_SHA"]
 
-# create cloud deploy pipeline 
+# 3. create cloud deploy pipeline 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
@@ -18,16 +18,18 @@ steps:
       else
         echo "Cloud Deploy pipeline already exists."
       fi
-
+# 4. cloud deploy pipeline release 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
   - '-c'
   - >
     gcloud deploy releases create release-$BUILD_ID
-    --delivery-pipeline=cicd-demo-app
+    --delivery-pipeline=cicd-app
     --region=us-central1
     --source=./
     --images=sample-app=us-central1-docker.pkg.dev/innate-valor-451418-i0/app-repo/cicd-app:$SHORT_SHA
+
+# 5. Logging Configuration
 options:
   logging: CLOUD_LOGGING_ONLY

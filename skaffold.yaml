@@ -1,7 +1,12 @@
+# 1. Skaffold Configuration Overview
+
 apiVersion: skaffold/v2beta16
 kind: Config
 metadata:
   name: web-app
+
+# 2. Build Configuration
+
 build:
   artifacts:
   - image: sample-app
@@ -12,10 +17,16 @@ build:
     gitCommit: {}
   local:
     useBuildkit: false
+
+# 3. Deployment Configuration
+
 deploy:
   kubectl:
     manifests:
     - kubernetes.yaml
+
+# 4. Profile Configuration (For Google Cloud Build)
+
 profiles:
 - name: gcb
 

@@ -1,21 +1,28 @@
+# 1. Delivery Pipeline Definition
 apiVersion: deploy.cloud.google.com/v1beta1
 kind: DeliveryPipeline
 metadata:
- name: new-cicd-demo-app
-description: cicd-demo application 
+ name: new-cicd-app
+description: cicd-app application 
 serialPipeline:
  stages:
  - targetId: staging
  - targetId: prod
 ---
+
+# 2. Staging Environment Target
+
 apiVersion: deploy.cloud.google.com/v1beta1
 kind: Target
 metadata:
  name: staging
 description: staging cluster
 gke:
- cluster: projects/black-display-408016/locations/us-central1-c/clusters/stage-gke
+ cluster: projects/innate-valor-451418-i0/locations/us-central1-a/clusters/stg-pipeline
 ---
+
+# 3. Production Environment Target
+
 apiVersion: deploy.cloud.google.com/v1beta1
 kind: Target
 metadata:
@@ -23,4 +30,4 @@ metadata:
 description: prod cluster
 requireApproval: true
 gke:
- cluster: projects/black-display-408016/locations/us-central1-c/clusters/prod-gke
+ cluster: projects/innate-valor-451418-i0/locations/us-central1-a/clusters/prod-pipeline
