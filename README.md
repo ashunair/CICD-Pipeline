@@ -15,6 +15,6 @@ This project provides a step-by-step guide to building a Cloud CI/CD pipeline fo
 - **Skaffold for Kubernetes Automation**: Simplifying deployment processes.
 - **GitHub to Cloud Build Triggers**: Enabling automated deployments on code commits.
 
-This project is available on **Devpost Blog**: [Documentation Link]() with detailed explanations and images to guide you through each step. For the complete implementation, refer to the **code repository**: [GitHub Repo](https://github.com/ashunair/CICD-Pipeline.git).
+This project is available on **Devpost Blog**: [Documentation Link](https://dev.to/ashunair/automated-cicd-pipeline-to-deploy-app-on-google-cloud-using-gke-5dm4) with detailed explanations and images to guide you through each step. For the complete implementation, refer to the **code repository**: [GitHub Repo](https://github.com/ashunair/CICD-Pipeline.git).
 
 
