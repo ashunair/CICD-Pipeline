@@ -1,6 +1,9 @@
 # Cloud CI/CD Pipeline Deployment on GKE
 
-## Overview
+![Revised of CI_CD Pipeline](https://github.com/user-attachments/assets/9e034a4f-39c7-4c8e-9ebd-3ff27ec252ea)
+
+
+### Overview
 
 This project provides a step-by-step guide to building a Cloud CI/CD pipeline for deploying a containerized application on **Google Kubernetes Engine (GKE)**. It covers the setup of **staging and production environments**, ensuring smooth and automated deployments using Google Cloud services.
 
